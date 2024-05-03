@@ -3,8 +3,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>판다마켓</title>
+		<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 		<link rel="stylesheet" href="./src/css/reset.css" />
-		<link rel="stylesheet" href="./src/css/style.css" />
+		<link rel="stylesheet" href="./src/css/global.css" />
+		<link rel="stylesheet" href="./src/css/home.css" />
 	</head>
 	<body>
 		<header>
@@ -13,17 +15,18 @@
 				<a href="/login" class="btn btn_small">로그인</a>
 			</nav>
 		</header>
-		<div class="kv">
-			<div class="inner">
-				<img src="./src/img/main/img_home_top.png" alt="" />
-				<h1>일상의 모든 물건을 <br />거래해 보세요</h1>
-				<a class="btn btn_large" href="/items">구경하러 가기</a>
-			</div>
-		</div>
+
 		<main>
+			<section class="hero">
+				<div class="inner">
+					<img src="./src/img/main/img_home_top.png" alt="인사하는 판다 일러스트" />
+					<h1>일상의 모든 물건을 <br />거래해 보세요</h1>
+					<a class="btn btn_large" href="/items">구경하러 가기</a>
+				</div>
+			</section>
 			<div class="wrapper">
 				<section class="inner">
-					<img src="./src/img/main/img_home_01.png" alt="" />
+					<img src="./src/img/main/img_home_01.png" alt="물건을 구경하는 판다 일러스트" />
 					<div class="desc">
 						<h2>
 							<span>Hot item</span>
@@ -33,7 +36,7 @@
 					</div>
 				</section>
 				<section class="inner">
-					<img src="./src/img/main/img_home_02.png" alt="" />
+					<img src="./src/img/main/img_home_02.png" alt="돋보기 일러스트" />
 					<div class="desc">
 						<h2>
 							<span>Search</span>
@@ -43,7 +46,7 @@
 					</div>
 				</section>
 				<section class="inner">
-					<img src="./src/img/main/img_home_03.png" alt="" />
+					<img src="./src/img/main/img_home_03.png" alt="카테고리 일러스트" />
 					<div class="desc">
 						<h2>
 							<span>Register</span>
@@ -53,7 +56,7 @@
 					</div>
 				</section>
 			</div>
-			<div class="bv">
+			<div class="banner">
 				<div class="inner">
 					<div class="desc">
 						<h2>
@@ -63,7 +66,7 @@
 					</div>
 				</div>
 
-				<img src="./src/img/main/img_home_bottom.png" alt="" />
+				<img src="./src/img/main/img_home_bottom.png" alt="대화하는 판다 일러스트" />
 			</div>
 		</main>
 		<footer>
@@ -74,20 +77,26 @@
 					<li><a href="/faq">FAQ</a></li>
 				</ul>
 				<ul class="sns">
-					<li
-						><a target="_blank" href="https://www.facebook.com">
-							<img src="./src/img/common/ic_facebook.svg" alt="facebook logo" />
+					<li>
+						<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com">
+							<img src="./src/img/common/ic_facebook.svg" alt="페이스북 로고" />
 						</a>
 					</li>
-					<li
-						><a target="_blank" href="https://www.twitter.com"> <img src="./src/img/common/ic_twitter.svg" alt="twitter logo" /> </a
-					></li>
-					<li
-						><a target="_blank" href="https://www.youtube.com"> <img src="./src/img/common/ic_youtube.svg" alt="youtube logo" /> </a
-					></li>
-					<li
-						><a target="_blank" href="https://www.instagram.com"> <img src="./src/img/common/ic_instagram.svg" alt="instagram logo" /> </a
-					></li>
+					<li>
+						<a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com">
+							<img src="./src/img/common/ic_twitter.svg" alt="트위터 로고" />
+						</a>
+					</li>
+					<li>
+						<a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com">
+							<img src="./src/img/common/ic_youtube.svg" alt="유튜브 로고" />
+						</a>
+					</li>
+					<li>
+						<a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com">
+							<img src="./src/img/common/ic_instagram.svg" alt="인스타그램 로고" />
+						</a>
+					</li>
 				</ul>
 			</div>
 		</footer>
