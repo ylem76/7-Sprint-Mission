@@ -1,0 +1,59 @@
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>판다마켓</title>
+		<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+		<link rel="stylesheet" href="/src/css/reset.css" />
+		<link rel="stylesheet" href="/src/css/global.css" />
+		<link rel="stylesheet" href="/src/css/login.css" />
+	</head>
+	<body>
+		<div class="logo">
+			<a href="/">
+				<img src="../src/img/common/logo.png" alt="판다마켓" width="396" />
+			</a>
+		</div>
+		<main>
+			<div class="wrapper">
+				<form action="">
+					<label for="signupEmail">이메일</label>
+					<input type="email" id="signupEmail" placeholder="이메일을 입력해주세요" />
+					<label for="signUpPW">비밀번호</label>
+					<div class="input_wrapper">
+						<input type="password" id="signUpPW" placeholder="비밀번호를 입력해주세요" />
+						<button class="btn_visibility close">
+							<img src="../src/img/login/btn_visibility_close.svg" alt="비밀번호 숨기기" />
+							<img src="../src/img/login/btn_visibility_open.svg" alt="비밀번호 보이기" visibility="hidden" />
+						</button>
+					</div>
+					<label for="signUpPWCheck">비밀번호 확인</label>
+					<div class="input_wrapper">
+						<input type="text" id="signUpPWCheck" placeholder="비밀번호를 다시 한 번 입력해주세요" />
+						<button class="btn_visibility close">
+							<img class="visibility_close" src="../src/img/login/btn_visibility_close.svg" alt="비밀번호 숨기기" />
+							<img class="visibility_open" src="../src/img/login/btn_visibility_open.svg" alt="비밀번호 보이기" />
+						</button>
+					</div>
+					<button id="btnLogin" class="btn btn_large">회원가입</button>
+				</form>
+				<div class="social_login">
+					간편 로그인하기
+					<ul>
+						<li>
+							<a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
+								<img src="../src/img/login/social_login_google.png" alt="구글 간편 로그인" />
+							</a>
+						</li>
+						<li>
+							<a href="https://www.kakaocorp.com/page/" target="_blank" rel="noopener noreferrer">
+								<img src="../src/img/login/social_login_kakao.png" alt="카카오톡 간편 로그인" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<p class="bottom_text">이미 회원이신가요? <a href="/login/" class="">로그인</a></p>
+			</div>
+		</main>
+	</body>
+</html>

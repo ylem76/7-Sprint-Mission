@@ -1,0 +1,71 @@
+/* body::after {
+	content: '';
+	width: 1920px;
+	height: 100vh;
+	background-image: url('../img/login/desktop.png');
+	background-size: 100% auto;
+	background-position: top center;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0.5;
+	pointer-events: none;
+} */
+
+.logo {
+	width: 396px;
+	margin: 0 auto;
+	margin-top: 58px;
+	margin-bottom: 44px;
+}
+
+.wrapper {
+	width: 90%;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.wrapper .btn {
+	background-color: var(--gray400);
+}
+
+.wrapper .btn:hover {
+	background-color: var(--blue);
+}
+
+.social_login {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 26px 0 24px;
+	height: 74px;
+	padding: 10px 23px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: var(--skyblue);
+}
+
+.social_login ul {
+	display: flex;
+	gap: 0 16px;
+}
+
+.social_login ul a {
+	display: block;
+}
+
+.bottom_text {
+	text-align: center;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 18px;
+	margin: 18px 0;
+}
+.bottom_text a {
+	color: var(--blue);
+	text-decoration: underline;
+}
