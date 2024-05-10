@@ -16,6 +16,7 @@
 
 body {
 	overflow-x: hidden;
+	font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 /* common */
@@ -33,12 +34,14 @@ header {
 	height: 70px;
 	display: flex;
 	justify-content: space-between;
-	max-width: 1520px;
 	margin: 0;
 	align-items: center;
 	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 2;
 	padding: 0 200px;
+	background-color: var(--white);
 }
 
 /* button default style */
@@ -76,7 +79,7 @@ header {
 .input_wrapper {
 	position: relative;
 }
-input {
+.text_input {
 	display: block;
 	background-color: var(--gray100);
 	border: 0;
@@ -89,13 +92,13 @@ input {
 	line-height: 24px;
 }
 
-input:focus {
+.text_input:focus {
 	outline-color: var(--blue);
 	/* border-color: 
 	border-color:red; */
 }
 
-input::placeholder {
+.text_input::placeholder {
 	color: var(--gray400);
 }
 .btn_visibility {
@@ -128,4 +131,10 @@ label {
 	font-size: 18px;
 	line-height: 21.8px;
 	margin: 24px 0 14px;
+}
+
+@media (max-width: 1199px) {
+	.gnb {
+		padding: 0 24px;
+	}
 }
