@@ -23,6 +23,7 @@ body {
 .inner {
 	max-width: 1200px;
 	margin: 0 auto;
+	width: 96%;
 }
 /* gnb */
 header {
@@ -40,8 +41,21 @@ header {
 	top: 0;
 	left: 0;
 	z-index: 2;
-	padding: 0 200px;
+	padding: 0 18px;
 	background-color: var(--white);
+}
+
+.gnb .logo {
+	width: 103px;
+	height: 51px;
+	position: relative;
+	overflow: hidden;
+}
+
+.gnb .logo img {
+	position: absolute;
+	right: 0;
+	width: 150px;
 }
 
 /* button default style */
@@ -68,11 +82,14 @@ header {
 }
 
 .btn_large {
-	/* width: 360px; */
-	width: 100%;
 	height: 56px;
 	border-radius: 40px;
 	font-size: 20px;
+	font-size: 16px;
+	width: 100%;
+	height: 48px;
+	margin: 0 auto;
+	padding: 0 34px;
 }
 
 /* input default style */
@@ -86,10 +103,10 @@ header {
 	width: 100%;
 	border-radius: 12px;
 	height: 56px;
-	margin: 14px 0 24px;
 	padding: 0 24px;
 	font-size: 16px;
 	line-height: 24px;
+	margin: 8px 0 17px 0;
 }
 
 .text_input:focus {
@@ -128,13 +145,42 @@ header {
 label {
 	display: block;
 	font-weight: 700;
-	font-size: 18px;
-	line-height: 21.8px;
-	margin: 24px 0 14px;
+	font-size: 13px;
+	line-height: 1.2;
+	margin: 0;
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 744px) {
 	.gnb {
 		padding: 0 24px;
+	}
+
+	.gnb .logo {
+		width: 153px;
+	}
+
+	.gnb .logo img {
+		width: 100%;
+	}
+
+	.btn_large {
+		display: flex;
+		width: 100%;
+		height: 60px;
+		font-size: 20px;
+	}
+	label {
+		font-size: 18px;
+		margin: 24px 0 10px;
+	}
+
+	.text_input {
+		margin: 14px 0 24px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.gnb {
+		padding: 0 200px;
 	}
 }
