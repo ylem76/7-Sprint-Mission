@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="/src/css/reset.css" />
 		<link rel="stylesheet" href="/src/css/global.css" />
 		<link rel="stylesheet" href="/src/css/login.css" />
+
+		<script src="/src/js/auth.js" defer></script>
 	</head>
 	<body>
 		<div class="logo">
@@ -25,18 +27,19 @@
 		</div>
 		<main>
 			<div class="wrapper">
-				<form action="">
+				<form action="" id="loginWrapper" class="formWrapper">
 					<label for="loginEmail">이메일</label>
-					<input class="text_input" type="email" id="loginEmail" placeholder="이메일을 입력해주세요" />
+					<div class="input_wrapper">
+						<input type="email" class="text_input" id="loginEmail" placeholder="이메일을 입력해주세요" data-validate="email" />
+						<p class="input_err_msg" id="loginEmailErr">잘못된 이메일입니다</p>
+					</div>
 					<label for="loginPW">비밀번호</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="password" id="signUpPW" placeholder="비밀번호를 입력해주세요" />
-						<button class="btn_visibility open">
-							<img class="visibility_close" src="/src/img/login/btn_visibility_close.svg" alt="비밀번호 숨기기" />
-							<img class="visibility_open" src="/src/img/login/btn_visibility_open.svg" alt="비밀번호 보이기" />
-						</button>
+						<input class="text_input" type="password" id="loginPW" placeholder="비밀번호를 입력해주세요" data-validate="password" />
+						<button class="btn_visibility open" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
+						<p class="input_err_msg" id="loginPWErr" data-target="loginPW" data-validate="confirmPassword">비밀번호를 8자 이상 입력해주세요</p>
 					</div>
-					<button id="btnLogin" class="btn btn_large">로그인</button>
+					<button id="btnLogin" class="btn btn_large btnSubmit" disabled>로그인</button>
 				</form>
 				<div class="social_login">
 					간편 로그인하기

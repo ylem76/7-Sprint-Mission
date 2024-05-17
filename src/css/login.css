@@ -12,10 +12,6 @@
 	margin: 0 auto;
 }
 
-.wrapper .btn {
-	background-color: var(--gray400);
-}
-
 .wrapper .btn:hover {
 	background-color: var(--blue);
 }

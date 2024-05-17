@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="/src/css/reset.css" />
 		<link rel="stylesheet" href="/src/css/global.css" />
 		<link rel="stylesheet" href="/src/css/login.css" />
+
+		<script src="/src/js/auth.js" defer></script>
 	</head>
 	<body>
 		<div class="logo">
@@ -25,26 +27,25 @@
 		</div>
 		<main>
 			<div class="wrapper">
-				<form action="">
+				<form action="" id="signUpWrapper" class="formWrapper">
 					<label for="signupEmail">이메일</label>
-					<input class="text_input" type="email" id="signupEmail" placeholder="이메일을 입력해주세요" />
+					<div class="input_wrapper">
+						<input class="text_input" type="email" id="signupEmail" data-validate="email" placeholder="이메일을 입력해주세요" />
+						<p class="input_err_msg" id="loginEmailErr">잘못된 이메일입니다</p>
+					</div>
 					<label for="signUpPW">비밀번호</label>
 					<div class="input_wrapper">
-						<input type="password" id="signUpPW" placeholder="비밀번호를 입력해주세요" />
-						<button class="btn_visibility close">
-							<img src="/src/img/login/btn_visibility_close.svg" alt="비밀번호 숨기기" />
-							<img src="/src/img/login/btn_visibility_open.svg" alt="비밀번호 보이기" visibility="hidden" />
-						</button>
+						<input class="text_input" type="password" id="signUpPW" data-validate="password" placeholder="비밀번호를 입력해주세요" />
+						<p class="input_err_msg" id="signUpPWErr">비밀번호를 입력해주세요</p>
+						<button class="btn_visibility close" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
 					</div>
 					<label for="signUpPWCheck">비밀번호 확인</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="text" id="signUpPWCheck" placeholder="비밀번호를 다시 한 번 입력해주세요" />
-						<button class="btn_visibility close">
-							<img class="visibility_close" src="/src/img/login/btn_visibility_close.svg" alt="비밀번호 숨기기" />
-							<img class="visibility_open" src="/src/img/login/btn_visibility_open.svg" alt="비밀번호 보이기" />
-						</button>
+						<input class="text_input" type="password" id="signUpPWCheck" data-target="signUpPW" data-validate="confirmPassword" placeholder="비밀번호를 다시 한 번 입력해주세요" />
+						<p class="input_err_msg" id="signUpPWCheckErr">비밀번호가 일치하지 않습니다</p>
+						<button class="btn_visibility close" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
 					</div>
-					<button id="btnLogin" class="btn btn_large">회원가입</button>
+					<button id="btnSignup" class="btn btn_large btnSubmit" disabled>회원가입</button>
 				</form>
 				<div class="social_login">
 					간편 로그인하기
