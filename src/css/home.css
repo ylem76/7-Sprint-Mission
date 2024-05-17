@@ -150,7 +150,7 @@ footer .sns {
 
 /* responsive */
 
-@media (min-width: var(--breakpoint-medium)) {
+@media (min-width: 768px) {
 	.hero {
 		height: 770px;
 	}
@@ -211,7 +211,7 @@ footer .sns {
 		bottom: auto;
 	}
 }
-@media (min-width: var(--breakpoint-large)) {
+@media (min-width: 1200px) {
 	.wrapper > section.inner {
 		/* max-width: 696px; */
 		padding-left: 24px;
