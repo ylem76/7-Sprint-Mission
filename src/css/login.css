@@ -8,7 +8,7 @@
 
 .wrapper {
 	width: 90%;
-	max-width: 640px;
+	max-width: 400px;
 	margin: 0 auto;
 }
 
@@ -61,6 +61,10 @@
 		width: 396px;
 		margin-top: 48px;
 		margin-bottom: 41px;
+	}
+
+	.wrapper {
+		max-width: 600px;
 	}
 
 	label {
