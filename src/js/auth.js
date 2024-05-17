@@ -68,6 +68,7 @@ const formValidation = (formClassName, submitButtonClassName) => {
 
 	// focus out
 	const wrapperEl = document.getElementsByClassName(formClassName)[0];
+	const btnEl = document.querySelector('.' + submitButtonClassName);
 	const inputList = wrapperEl.querySelectorAll('input');
 	const inputState = {};
 	inputList.forEach((input) => {
@@ -89,9 +90,8 @@ const formValidation = (formClassName, submitButtonClassName) => {
 		renderErrMsg(currentEl.id, errorMessage);
 
 		const isAllValid = isAllInputsValid(inputState);
-		const btnEl = document.querySelector('.' + submitButtonClassName);
+
 		btnEl.disabled = !isAllValid;
-		console.log(btnEl, btnEl.disabled, isAllValid);
 	});
 
 	wrapperEl.addEventListener('click', (e) => {
@@ -109,6 +109,12 @@ const formValidation = (formClassName, submitButtonClassName) => {
 		}
 		if (e.target.classList.contains('btn_visibility')) {
 		}
+	});
+
+	btnEl.addEventListener('click', () => {
+		// 페이지 이동
+		const address = btnEl.getAttribute('data-href');
+		window.location.href = address;
 	});
 };
 
