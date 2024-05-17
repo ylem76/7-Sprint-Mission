@@ -12,6 +12,10 @@
 	--skyblue: #cfe5ff;
 	--red: #f74747;
 	--deepblue: #1967d6;
+
+	/* 레이아웃 변수 정의 */
+	--breakpoint-medium: 768px;
+	--breakpoint-large: 1200px;
 }
 
 body {
@@ -150,7 +154,7 @@ label {
 	margin: 0;
 }
 
-@media (min-width: 744px) {
+@media (min-width: var(--breakpoint-medium)) {
 	.gnb {
 		padding: 0 24px;
 	}
@@ -179,7 +183,7 @@ label {
 	}
 }
 
-@media (min-width: 1200px) {
+@media (min-width: var(--breakpoint-large)) {
 	.gnb {
 		padding: 0 200px;
 	}
