@@ -27,44 +27,32 @@ const formValidation = (formClassName, submitButtonClassName) => {
 
 	// validation
 	const inputValidation = (type, value, targetPWValue) => {
-		let errorMessage = '';
-
 		switch (type) {
 			case 'email':
 				if (!value.trim()) {
-					errorMessage = '이메일을 입력해주세요.';
-					break;
+					return '이메일을 입력해주세요.';
 				}
 				const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 				if (!emailRegex.test(value)) {
-					errorMessage = '잘못된 이메일 형식입니다';
-					break;
+					return '잘못된 이메일 형식입니다';
 				}
-
-				break;
 			case 'password':
 				if (!value.trim()) {
-					errorMessage = '비밀번호를 입력해주세요.';
-					break;
+					return '비밀번호를 입력해주세요.';
 				}
 
 				if (value.trim().length < 8) {
-					errorMessage = '비밀번호를 8자 이상 입력해주세요.';
-					break;
+					return '비밀번호를 8자 이상 입력해주세요.';
 				}
-				break;
 
 			case 'confirmPassword':
 				if (value !== targetPWValue) {
-					errorMessage = '비밀번호가 일치하지 않습니다';
-					break;
+					return '비밀번호가 일치하지 않습니다';
 				}
 
 			default:
-				break;
+				return '';
 		}
-
-		return errorMessage;
 	};
 
 	// render error message
@@ -105,13 +93,16 @@ const formValidation = (formClassName, submitButtonClassName) => {
 
 		const inputType = currentEl.getAttribute('data-validate');
 		const inputValue = currentEl.value;
-		const targetPWValue = document.getElementById(currentEl.getAttribute('data-target'))?.value;
-		const errorMessage = inputValidation(inputType, inputValue, targetPWValue || undefined);
+		const currentId = currentEl.id;
+
+		// confirm type일 때 원본 값 가져오기
+		const targetPWValue = inputType.includes('confirm') ? document.getElementById(currentId.replace('Check', ''))?.value : '';
+
+		const errorMessage = inputValidation(inputType, inputValue, targetPWValue);
 		inputState[currentEl.id] = errorMessage;
 		renderErrMsg(currentEl.id, errorMessage);
 
 		const isAllValid = isAllInputsValid(inputState);
-
 		btnEl.disabled = !isAllValid;
 	};
 
