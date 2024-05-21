@@ -151,6 +151,7 @@ header {
 	background-position: center;
 	cursor: pointer;
 	padding: 0;
+	background-color: transparent;
 	background-image: url('/src/img/login/btn_visibility_open.svg');
 }
 
@@ -158,18 +159,6 @@ header {
 	background-image: url('/src/img/login/btn_visibility_close.svg');
 }
 
-/* .btn_visibility > img {
-	position: absolute;
-	top: 0;
-	right: 0;
-} */
-
-/* .btn_visibility.open .visibility_close,
-.btn_visibility.close .visibility_open {
-	display: none;
-	visibility: hidden;
-}
- */
 label {
 	display: block;
 	font-weight: 700;
