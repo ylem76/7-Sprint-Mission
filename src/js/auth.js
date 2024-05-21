@@ -14,15 +14,13 @@ const formValidation = (formClassName, submitButtonClassName) => {
 	const btnEl = document.querySelector('.' + submitButtonClassName);
 	const inputList = wrapperEl.querySelectorAll('input');
 
-	// init inputState
 	const initInputState = (inputList) => {
-		const inputState = {};
-		inputList.forEach((input) => {
-			const id = input.id;
-			inputState[id] = undefined;
-		});
-		return inputState;
+		return Array.from(inputList).reduce((inputState, input) => {
+			inputState[input.id] = undefined;
+			return inputState;
+		}, {});
 	};
+
 	const inputState = initInputState(inputList);
 
 	// validation
@@ -36,6 +34,7 @@ const formValidation = (formClassName, submitButtonClassName) => {
 				if (!emailRegex.test(value)) {
 					return '잘못된 이메일 형식입니다';
 				}
+				break;
 			case 'password':
 				if (!value.trim()) {
 					return '비밀번호를 입력해주세요.';
@@ -44,14 +43,17 @@ const formValidation = (formClassName, submitButtonClassName) => {
 				if (value.trim().length < 8) {
 					return '비밀번호를 8자 이상 입력해주세요.';
 				}
+				break;
 
 			case 'confirmPassword':
 				if (value !== targetPWValue) {
 					return '비밀번호가 일치하지 않습니다';
 				}
+				break;
 
 			default:
 				return '';
+				break;
 		}
 	};
 
