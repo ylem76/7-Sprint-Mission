@@ -30,18 +30,18 @@
 				<form action="" id="signUpWrapper" class="formWrapper">
 					<label for="signupEmail">이메일</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="email" id="signupEmail" data-validate="email" placeholder="이메일을 입력해주세요" />
+						<input class="text_input" type="email" id="signupEmail" data-validate="email" placeholder="이메일을 입력해주세요" required />
 						<p class="input_err_msg" id="loginEmailErr">잘못된 이메일입니다</p>
 					</div>
 					<label for="signUpPW">비밀번호</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="password" id="signUpPW" data-validate="password" placeholder="비밀번호를 입력해주세요" />
+						<input class="text_input" type="password" id="signUpPW" minlength="8" data-validate="password" placeholder="비밀번호를 입력해주세요" required />
 						<p class="input_err_msg" id="signUpPWErr">비밀번호를 입력해주세요</p>
 						<button class="btn_visibility close" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
 					</div>
 					<label for="signUpPWCheck">비밀번호 확인</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="password" id="signUpPWCheck" data-validate="confirmPassword" placeholder="비밀번호를 다시 한 번 입력해주세요" />
+						<input class="text_input" type="password" id="signUpPWCheck" minlength="8" data-validate="confirmPassword" placeholder="비밀번호를 다시 한 번 입력해주세요" required />
 						<p class="input_err_msg" id="signUpPWCheckErr">비밀번호가 일치하지 않습니다</p>
 						<button class="btn_visibility close" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
 					</div>

@@ -30,12 +30,12 @@
 				<form action="" id="loginWrapper" class="formWrapper">
 					<label for="loginEmail">이메일</label>
 					<div class="input_wrapper">
-						<input type="email" class="text_input" id="loginEmail" placeholder="이메일을 입력해주세요" data-validate="email" />
+						<input type="email" class="text_input" id="loginEmail" placeholder="이메일을 입력해주세요" data-validate="email" required />
 						<p class="input_err_msg" id="loginEmailErr">잘못된 이메일입니다</p>
 					</div>
 					<label for="loginPW">비밀번호</label>
 					<div class="input_wrapper">
-						<input class="text_input" type="password" id="loginPW" placeholder="비밀번호를 입력해주세요" data-validate="password" />
+						<input class="text_input" type="password" id="loginPW" minlength="8" placeholder="비밀번호를 입력해주세요" data-validate="password" required />
 						<button class="btn_visibility open" type="button" aria-label="비밀번호 보이기 / 숨기기"> </button>
 						<p class="input_err_msg" id="loginPWErr" data-validate="confirmPassword">비밀번호를 8자 이상 입력해주세요</p>
 					</div>
