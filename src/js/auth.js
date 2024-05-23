@@ -12,16 +12,15 @@ const formValidation = (formClassName, submitButtonClassName) => {
 	// elements
 	const wrapperEl = document.querySelector('.' + formClassName);
 	const btnEl = document.querySelector('.' + submitButtonClassName);
-	const inputList = wrapperEl.querySelectorAll('input');
 
 	const initInputState = (inputList) => {
 		return Array.from(inputList).reduce((inputState, input) => {
-			inputState[input.id] = undefined;
+			inputState[input.id] = null;
 			return inputState;
 		}, {});
 	};
 
-	const inputState = initInputState(inputList);
+	const inputState = initInputState(wrapperEl.querySelectorAll('input'));
 
 	// validation
 	const inputValidation = (type, value, targetPWValue) => {
@@ -35,6 +34,12 @@ const formValidation = (formClassName, submitButtonClassName) => {
 					return '잘못된 이메일 형식입니다';
 				}
 				break;
+
+			case 'confirmPassword':
+				if (value !== targetPWValue) {
+					return '비밀번호가 일치하지 않습니다';
+				}
+
 			case 'password':
 				if (!value.trim()) {
 					return '비밀번호를 입력해주세요.';
@@ -44,17 +49,8 @@ const formValidation = (formClassName, submitButtonClassName) => {
 					return '비밀번호를 8자 이상 입력해주세요.';
 				}
 				break;
-
-			case 'confirmPassword':
-				if (value !== targetPWValue) {
-					return '비밀번호가 일치하지 않습니다';
-				}
-				break;
-
-			default:
-				return '';
-				break;
 		}
+		return '';
 	};
 
 	// render error message
@@ -76,13 +72,8 @@ const formValidation = (formClassName, submitButtonClassName) => {
 	};
 
 	// all input valid check
-	const isAllInputsValid = (inputState) => {
-		for (const inputId in inputState) {
-			if (inputState[inputId] !== '') {
-				return false;
-			}
-		}
-		return true;
+	const areAllInputsValid = (inputState) => {
+		return Object.values(inputState).every((error) => !error);
 	};
 
 	// handlers
@@ -104,8 +95,9 @@ const formValidation = (formClassName, submitButtonClassName) => {
 		inputState[currentEl.id] = errorMessage;
 		renderErrMsg(currentEl.id, errorMessage);
 
-		const isAllValid = isAllInputsValid(inputState);
-		btnEl.disabled = !isAllValid;
+		btnEl.disabled = !areAllInputsValid(inputState);
+
+		console.log(areAllInputsValid(inputState));
 	};
 
 	const handlePWVisibility = (e) => {
