@@ -9,60 +9,57 @@ import Pagination from '../components/ui/Pagination';
 // hooks
 import useResize from '../hooks/useResize';
 
+/**
+ * 파라미터가 변경 되면 useCallback과 useEffect로 api조회
+ * */
 export default function ItemsPage() {
+  // [data] 커스텀 훅을 이용해 화면 가로 너비 값 구함
   const { w: windowWidth } = useResize();
 
-  const calculateItemQuantity = (windowWidth) => {
-    let quantity = 4;
-    if (windowWidth > 767) {
-      quantity = 6;
-    }
-    if (windowWidth > 1199) {
-      quantity = 12;
-    }
-    return quantity;
-  };
-  useEffect(() => {
-    const itemPerPage = calculateItemQuantity(windowWidth);
-    setParameters((prev) => {
-      return {
-        ...prev,
-        page: 1,
-        pageSize: itemPerPage,
-      };
-    });
-  }, [windowWidth]);
-
+  // [data] useState를 활용한 초기값 정의
   const [parameters, setParameters] = useState({
     orderBy: 'recent',
     pageSize: 12,
     page: 1,
   });
-
   const [bestItems, setBestItems] = useState([]);
   const [items, setItems] = useState([]);
   const [totalCount, setTotalCount] = useState(null);
 
-  const getItems = useCallback(async () => {
-    const { orderBy, pageSize, page } = parameters;
-    const url = `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}`;
-    const data = await fetch(url);
-    const items = await data.json();
-    return items;
-  }, [parameters]);
+  // [calculate] 렌더링할 아이템 개수 계산
+  const calculateItemQuantity = (windowWidth) => {
+    if (windowWidth > 1199) return 12;
+    if (windowWidth > 767) return 6;
+    return 4;
+  };
 
-  const fetchBestItems = async (parameters) => {
-    const { orderBy, pageSize, page } = parameters;
+  // [action] setState
+  useEffect(() => {
+    const itemsPerPage = calculateItemQuantity(windowWidth);
+    setParameters((prev) => {
+      return {
+        ...prev,
+        page: 1, // 가로 너비가 달라졌을 때 무조건 1페이지로 이동
+        pageSize: itemsPerPage,
+      };
+    });
+  }, [windowWidth]);
+
+  // [action] fetch
+  const fetchData = async (params = parameters) => {
+    const { orderBy, pageSize, page } = params;
     const url = `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}`;
     const data = await fetch(url);
     const items = await data.json();
     return items;
   };
 
+  const fetchItems = useCallback(fetchData, [parameters]);
+
   // fetch best items
   useEffect(() => {
-    const fetchData = async (parameters) => {
-      const items = await fetchBestItems(parameters);
+    const setBestItemsData = async (parameters) => {
+      const items = await fetchData(parameters);
       setBestItems(items.list);
     };
 
@@ -71,20 +68,21 @@ export default function ItemsPage() {
       pageSize: 4,
       page: 1,
     };
-    fetchData(bestParams);
+    setBestItemsData(bestParams);
   }, []);
 
   //fetch items
   useEffect(() => {
-    const fetchData = async () => {
-      const items = await getItems();
+    const setItemsData = async () => {
+      const items = await fetchItems();
       setItems(items.list);
       setTotalCount(items.totalCount);
     };
 
-    fetchData();
-  }, [getItems]);
+    setItemsData();
+  }, [fetchItems]);
 
+  // [action]
   const handlePaginationClick = (index) => {
     const currentPage = index;
     setParameters((prev) => {
@@ -97,7 +95,10 @@ export default function ItemsPage() {
       <article>
         <h1>베스트 상품</h1>
       </article>
-      <ProductList listType='best'>{bestItems && bestItems.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
+      <ProductList listType='best'>
+        {bestItems &&
+          bestItems.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}
+      </ProductList>
 
       <article>
         <h1>전체 상품</h1>
@@ -116,9 +117,19 @@ export default function ItemsPage() {
           <option value='favorite'>좋아요 순</option>
         </select>
 
-        <ProductList>{items && items.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
+        <ProductList>
+          {items && items.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}
+        </ProductList>
       </article>
-      <div>{totalCount && <Pagination totalPage={Math.ceil(totalCount / parameters.pageSize)} currentIndex={parameters.page} onClick={handlePaginationClick} />}</div>
+      <div>
+        {totalCount && (
+          <Pagination
+            totalPage={Math.ceil(totalCount / parameters.pageSize)}
+            currentIndex={parameters.page}
+            onClick={handlePaginationClick}
+          />
+        )}
+      </div>
     </div>
   );
 }
