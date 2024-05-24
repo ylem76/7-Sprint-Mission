@@ -86,7 +86,7 @@ export default function ItemsPage() {
   }, [getItems]);
 
   const handlePaginationClick = (index) => {
-    const currentPage = index + 1;
+    const currentPage = index;
     setParameters((prev) => {
       return { ...prev, page: currentPage };
     });
