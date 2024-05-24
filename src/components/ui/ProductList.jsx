@@ -1,5 +1,5 @@
 import React from 'react';
-
-export default function ProductList({ children }) {
-  return <ul>{children}</ul>;
+import style from './ProductList.module.css';
+export default function ProductList({ listType, children }) {
+  return <ul className={`${style[listType]} ${style['product-list']}`}>{children}</ul>;
 }

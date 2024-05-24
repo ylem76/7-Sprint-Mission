@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+
+// components
 import ProductList from '../components/ui/ProductList';
 import ProductItem from '../components/ui/ProductItem';
-
 import Pagination from '../components/ui/Pagination';
 
+// hooks
 import useResize from '../hooks/useResize';
 
 export default function ItemsPage() {
@@ -95,13 +97,13 @@ export default function ItemsPage() {
       <article>
         <h1>베스트 상품</h1>
       </article>
-      <ProductList>{bestItems && bestItems.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
+      <ProductList listType='best'>{bestItems && bestItems.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
 
       <article>
         <h1>전체 상품</h1>
         {/* search & select */}
         <input type='text' placeholder='검색할 상품을 입력해주세요' />
-        <Link to='/'>상품 등록하기</Link>
+        <Link to='/additem'>상품 등록하기</Link>
         <select
           name='orderBy'
           id='order-by'

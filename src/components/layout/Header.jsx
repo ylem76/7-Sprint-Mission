@@ -19,7 +19,7 @@ export default function Header() {
             <Link to='/'>자유게시판</Link>
           </li>
           <li>
-            <Link to='/items' className={currentPathName === 'items' ? 'current' : ''}>
+            <Link to='/items' className={currentPathName === 'items' ? styles.current : ''}>
               중고마켓
             </Link>
           </li>

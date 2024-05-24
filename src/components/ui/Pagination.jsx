@@ -1,10 +1,8 @@
 import React from 'react';
+import style from './Pagination.module.css';
 
-export default function Pagination({ totalPage, currentIndex, onClick }) {
-  const pageArr = Array.from({ length: totalPage }, (_, index) => {
-    return { current: index === currentIndex };
-  });
-  return pageArr.map((page, index) => (
+function PaginationItem({ page, index, onClick }) {
+  return (
     <div key={index} className={page.current ? 'current' : ''}>
       <button
         onClick={() => {
@@ -13,5 +11,16 @@ export default function Pagination({ totalPage, currentIndex, onClick }) {
         {index + 1}
       </button>
     </div>
-  ));
+  );
+}
+export default function Pagination(props) {
+  const { totalPage, currentIndex, onClick } = props;
+  const pageArr = Array.from({ length: totalPage }, (_, index) => ({ current: index === currentIndex }));
+  return (
+    <div className={style.pagination}>
+      {pageArr.map((page, index) => (
+        <PaginationItem key={index} index={index} page={page} onClick={onClick} />
+      ))}
+    </div>
+  );
 }
