@@ -5,7 +5,32 @@ import ProductItem from '../components/ui/ProductItem';
 
 import Pagination from '../components/ui/Pagination';
 
+import useResize from '../hooks/useResize';
+
 export default function ItemsPage() {
+  const { w: windowWidth } = useResize();
+
+  const calculateItemQuantity = (windowWidth) => {
+    let quantity = 4;
+    if (windowWidth > 767) {
+      quantity = 6;
+    }
+    if (windowWidth > 1199) {
+      quantity = 12;
+    }
+    return quantity;
+  };
+  useEffect(() => {
+    const itemPerPage = calculateItemQuantity(windowWidth);
+    setParameters((prev) => {
+      return {
+        ...prev,
+        page: 1,
+        pageSize: itemPerPage,
+      };
+    });
+  }, [windowWidth]);
+
   const [parameters, setParameters] = useState({
     orderBy: 'recent',
     pageSize: 12,
@@ -82,7 +107,7 @@ export default function ItemsPage() {
           id='order-by'
           onChange={(e) => {
             setParameters((prevValue) => {
-              return { ...prevValue, orderBy: e.target.value };
+              return { ...prevValue, page: 1, orderBy: e.target.value };
             });
           }}>
           <option value='recent'>최신 순</option>
