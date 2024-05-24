@@ -1,13 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import ProductList from '../components/ui/ProductList';
+import ProductItem from '../components/ui/ProductItem';
+
+import Pagination from '../components/ui/Pagination';
 
 export default function ItemsPage() {
   const [parameters, setParameters] = useState({
     orderBy: 'recent',
-    pageSize: 10,
+    pageSize: 12,
     page: 1,
   });
 
+  const [bestItems, setBestItems] = useState([]);
   const [items, setItems] = useState([]);
   const [totalCount, setTotalCount] = useState(null);
 
@@ -19,23 +24,53 @@ export default function ItemsPage() {
     return items;
   }, [parameters]);
 
+  const fetchBestItems = async (parameters) => {
+    const { orderBy, pageSize, page } = parameters;
+    const url = `https://panda-market-api.vercel.app/products?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}`;
+    const data = await fetch(url);
+    const items = await data.json();
+    return items;
+  };
+
+  // fetch best items
+  useEffect(() => {
+    const fetchData = async (parameters) => {
+      const items = await fetchBestItems(parameters);
+      setBestItems(items.list);
+    };
+
+    const bestParams = {
+      orderBy: 'favorite',
+      pageSize: 4,
+      page: 1,
+    };
+    fetchData(bestParams);
+  }, []);
+
+  //fetch items
   useEffect(() => {
     const fetchData = async () => {
       const items = await getItems();
       setItems(items.list);
-      console.log(Math.ceil(items.totalCount / parameters.pageSize));
       setTotalCount(items.totalCount);
     };
 
     fetchData();
   }, [getItems]);
 
+  const handlePaginationClick = (index) => {
+    const currentPage = index + 1;
+    setParameters((prev) => {
+      return { ...prev, page: currentPage };
+    });
+  };
+
   return (
     <div>
       <article>
         <h1>베스트 상품</h1>
       </article>
-      <ul></ul>
+      <ProductList>{bestItems && bestItems.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
 
       <article>
         <h1>전체 상품</h1>
@@ -54,37 +89,9 @@ export default function ItemsPage() {
           <option value='favorite'>좋아요 순</option>
         </select>
 
-        {/* list */}
-        <ul>
-          {items.map((item) => {
-            return (
-              <li key={item.id}>
-                <Link to={`/items/${item.id}`}>
-                  <h3>{item.name}</h3>
-                  <p>{item.price}</p>
-                  <p>{item.favoriteCount}</p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <ProductList>{items && items.map((item) => <ProductItem item={item} key={item.id}></ProductItem>)}</ProductList>
       </article>
-      <div>
-        {totalCount > 0 &&
-          Array.from({ length: Math.ceil(totalCount / parameters.pageSize) }, (_, index) => (
-            <div key={index} className={parameters.page === index + 1 ? 'current' : ''}>
-              <button
-                onClick={() => {
-                  // update page
-                  setParameters((prevValue) => {
-                    return { ...prevValue, page: index + 1 };
-                  });
-                }}>
-                {index + 1}
-              </button>
-            </div>
-          ))}
-      </div>
+      <div>{totalCount && <Pagination totalPage={Math.ceil(totalCount / parameters.pageSize)} currentIndex={parameters.page} onClick={handlePaginationClick} />}</div>
     </div>
   );
 }
