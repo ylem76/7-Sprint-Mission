@@ -9,6 +9,7 @@ export default function ItemsPage() {
   });
 
   const [items, setItems] = useState([]);
+  const [totalCount, setTotalCount] = useState(null);
 
   const getItems = useCallback(async () => {
     const { orderBy, pageSize, page } = parameters;
@@ -22,6 +23,8 @@ export default function ItemsPage() {
     const fetchData = async () => {
       const items = await getItems();
       setItems(items.list);
+      console.log(Math.ceil(items.totalCount / parameters.pageSize));
+      setTotalCount(items.totalCount);
     };
 
     fetchData();
@@ -39,7 +42,14 @@ export default function ItemsPage() {
         {/* search & select */}
         <input type='text' placeholder='검색할 상품을 입력해주세요' />
         <Link to='/'>상품 등록하기</Link>
-        <select name='orderBy' id='order-by'>
+        <select
+          name='orderBy'
+          id='order-by'
+          onChange={(e) => {
+            setParameters((prevValue) => {
+              return { ...prevValue, orderBy: e.target.value };
+            });
+          }}>
           <option value='recent'>최신 순</option>
           <option value='favorite'>좋아요 순</option>
         </select>
@@ -59,6 +69,22 @@ export default function ItemsPage() {
           })}
         </ul>
       </article>
+      <div>
+        {totalCount > 0 &&
+          Array.from({ length: Math.ceil(totalCount / parameters.pageSize) }, (_, index) => (
+            <div key={index} className={parameters.page === index + 1 ? 'current' : ''}>
+              <button
+                onClick={() => {
+                  // update page
+                  setParameters((prevValue) => {
+                    return { ...prevValue, page: index + 1 };
+                  });
+                }}>
+                {index + 1}
+              </button>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
