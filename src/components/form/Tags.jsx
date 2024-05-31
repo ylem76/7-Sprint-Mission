@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { Input } from '../ui/Inputs';
+import { ButtonDeleteRound } from '../ui/Buttons';
 
 function TagItem({ tag, handleDelete }) {
   return (
-    <div>
+    <div
+      className={`text-base font-normal leading-6 px-4 py-3 flex gap-4 text-left rounded-full bg-gray-100`}>
       {tag}
-      <button
+      <ButtonDeleteRound
         type='button'
         onClick={() => {
           handleDelete(tag);
         }}>
         삭제
-      </button>
+      </ButtonDeleteRound>
     </div>
   );
 }
@@ -55,8 +58,7 @@ export default function Tags({ tags, setValues }) {
 
   return (
     <>
-      <label htmlFor='ipt-tag'>태그</label>
-      <input
+      <Input
         type='text'
         name='tag'
         id='ipt-tag'
@@ -66,7 +68,8 @@ export default function Tags({ tags, setValues }) {
         onKeyDown={handleKeyDown}
         placeholder='태그를 입력해주세요'
       />
-      <ul className='tag-list'>
+
+      <ul className='flex gap-4'>
         {tags &&
           tags.length > 0 &&
           tags.map((tag) => {

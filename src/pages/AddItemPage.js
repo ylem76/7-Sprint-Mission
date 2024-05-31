@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Tags from '../components/form/Tags';
 import FileInput from '../components/form/FileInput';
+import { Input, Label, TextArea } from '../components/ui/Inputs';
+import { Button } from '../components/ui/Buttons';
 
 const INITIAL_VALUES = {
   image: undefined,
@@ -64,24 +66,29 @@ export default function AddItemPage() {
 
   return (
     <div>
-      <form method='post' id='form-add-item' onSubmit={handleSubmit}>
+      <form
+        method='post'
+        id='form-add-item'
+        onSubmit={handleSubmit}
+        className={`w-11/12 mx-auto`}>
         <div className='form-header'>
           <h1>상품 등록하기</h1>
-          <button
+          <Button
+            className='btn-small'
             type='submit'
             disabled={!isFormComplete}
             onClick={() => {
               console.log(isFormComplete);
             }}>
             등록
-          </button>
+          </Button>
         </div>
-        <label htmlFor='ipt-files'>상품 이미지</label>
+        <Label htmlFor='ipt-files'>상품 이미지</Label>
 
         <FileInput setValues={setValues} />
 
-        <label htmlFor='ipt-product-name'>상품명</label>
-        <input
+        <Label htmlFor='ipt-product-name'>상품명</Label>
+        <Input
           type='text'
           id='ipt-product-name'
           name='name'
@@ -90,15 +97,18 @@ export default function AddItemPage() {
           placeholder='상품명을 입력해주세요'
         />
 
-        <label htmlFor='ipt-product-description'>상품 소개</label>
-        <textarea
+        <Label htmlFor='ipt-product-description'>상품 소개</Label>
+        <TextArea
+          className='textarea'
           name='description'
           id='ipt-product-description'
           onChange={handleInputChange}
-          placeholder='상품 소개를 입력해주세요'></textarea>
+          placeholder='상품 소개를 입력해주세요'
+          rows='6'
+        />
 
-        <label htmlFor='ipt-product-price'>판매 가격</label>
-        <input
+        <Label htmlFor='ipt-product-price'>판매 가격</Label>
+        <Input
           name='price'
           id='ipt-product-price'
           type='text'
@@ -107,6 +117,7 @@ export default function AddItemPage() {
           placeholder='판매 가격을 입력해주세요'
         />
 
+        <Label htmlFor='ipt-tag'>태그</Label>
         <Tags tags={values.tags} setValues={setValues} />
       </form>
     </div>

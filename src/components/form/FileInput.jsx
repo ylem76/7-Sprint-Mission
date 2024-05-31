@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { ButtonAddImage, ButtonDeleteRound } from '../ui/Buttons';
 
 export default function FileInput({ setValues }) {
   const [previewImage, setPreviewImage] = useState(null);
@@ -37,19 +38,31 @@ export default function FileInput({ setValues }) {
     setValues((prev) => ({ ...prev, image: previewImage }));
   }, [previewImage, setValues]);
   return (
-    <>
-      <button
+    <div className='flex gap-2'>
+      <ButtonAddImage
         type='button'
         onClick={() => {
           inputRef.current.click();
-        }}>
-        이미지 등록하기
-      </button>
-      <img src={previewImage} alt='사용자가 등록한 상품 이미지' />
+        }}
+      />
+
       {previewImage && (
-        <button type='button' onClick={handlePreviewClear}>
-          삭제
-        </button>
+        <div className={`w-42 h-42 bg-gray-100 relative`}>
+          <div className='w-full h-full overflow-hidden rounded-md'>
+            <img
+              className={`object-cover w-full h-full`}
+              src={previewImage}
+              alt='사용자가 등록한 상품 이미지'
+            />
+          </div>
+
+          <ButtonDeleteRound
+            className='absolute top-2 right-2'
+            type='button'
+            onClick={handlePreviewClear}>
+            삭제
+          </ButtonDeleteRound>
+        </div>
       )}
       <input
         id='ipt-files'
@@ -59,6 +72,6 @@ export default function FileInput({ setValues }) {
         hidden
         onChange={handlePreviewImage}
       />
-    </>
+    </div>
   );
 }
