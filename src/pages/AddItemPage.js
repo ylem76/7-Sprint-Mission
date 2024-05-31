@@ -41,7 +41,7 @@ export default function AddItemPage() {
 
   useEffect(() => {
     // when values changed
-    setIsFormComplete((prev) => checkFormComplete(values));
+    setIsFormComplete(checkFormComplete(values));
   }, [values]);
 
   // handlers
@@ -87,13 +87,15 @@ export default function AddItemPage() {
           name='name'
           value={values.name}
           onChange={handleInputChange}
+          placeholder='상품명을 입력해주세요'
         />
 
         <label htmlFor='ipt-product-description'>상품 소개</label>
         <textarea
           name='description'
           id='ipt-product-description'
-          onChange={handleInputChange}></textarea>
+          onChange={handleInputChange}
+          placeholder='상품 소개를 입력해주세요'></textarea>
 
         <label htmlFor='ipt-product-price'>판매 가격</label>
         <input
@@ -102,6 +104,7 @@ export default function AddItemPage() {
           type='text'
           value={addCommas(values.price.toString())}
           onChange={handleInputChange}
+          placeholder='판매 가격을 입력해주세요'
         />
 
         <Tags tags={values.tags} setValues={setValues} />

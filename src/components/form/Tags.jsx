@@ -64,6 +64,7 @@ export default function Tags({ tags, setValues }) {
         onChange={handleChange}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
+        placeholder='태그를 입력해주세요'
       />
       <ul className='tag-list'>
         {tags &&
