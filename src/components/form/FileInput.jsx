@@ -34,7 +34,6 @@ export default function FileInput({ setValues }) {
   }, []);
 
   useEffect(() => {
-    if (!previewImage) return;
     setValues((prev) => ({ ...prev, image: previewImage }));
   }, [previewImage, setValues]);
   return (

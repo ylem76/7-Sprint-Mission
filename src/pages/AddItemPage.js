@@ -3,19 +3,17 @@ import Tags from '../components/form/Tags';
 import FileInput from '../components/form/FileInput';
 
 const INITIAL_VALUES = {
-  images: undefined,
+  image: undefined,
   name: '',
   description: '',
   price: '',
-  tags: ['tag test'],
+  tags: [],
 };
 
 function sanitize(type, value) {
   // number type sanitize
-
   switch (type) {
     case 'number':
-      console.log(typeof value);
       return Number(value) || 0;
 
     default:
@@ -27,16 +25,15 @@ export default function AddItemPage() {
   const [values, setValues] = useState(INITIAL_VALUES);
 
   useEffect(() => {
-    console.log(values.price);
     // when values changed
-    // setIsFormComplete((prev) => {
-    //   return prev;
-    // });
+    setIsFormComplete((prev) => checkFormComplete(values));
   }, [values]);
 
-  useEffect(() => {
-    console.log(isFormComplete);
-  }, [isFormComplete]);
+  const checkFormComplete = (values) => {
+    return Object.values(values).every((value) => {
+      return Boolean(value);
+    });
+  };
 
   // handlers
   const handleSubmit = (e) => {
@@ -58,11 +55,7 @@ export default function AddItemPage() {
 
   return (
     <div>
-      <form
-        method='post'
-        // action='/submit'
-        id='form-add-item'
-        onSubmit={handleSubmit}>
+      <form method='post' id='form-add-item' onSubmit={handleSubmit}>
         <div className='form-header'>
           <h1>상품 등록하기</h1>
           <button
@@ -102,7 +95,7 @@ export default function AddItemPage() {
           onChange={handleInputChange}
         />
 
-        <Tags tags={values.tags} setTags={handleChange} setValues={setValues} />
+        <Tags tags={values.tags} setValues={setValues} />
       </form>
     </div>
   );
