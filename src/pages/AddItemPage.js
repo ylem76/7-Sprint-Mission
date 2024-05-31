@@ -10,16 +10,31 @@ const INITIAL_VALUES = {
   tags: [],
 };
 
-function sanitize(type, value) {
-  // number type sanitize
-  switch (type) {
-    case 'number':
-      return Number(value) || 0;
+function sanitize(name, value) {
+  switch (name) {
+    case 'price':
+      return Number(removeCommas(value)) || 0;
 
     default:
       return value;
   }
 }
+
+// price add &remove commas
+const addCommas = (value) => {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+const removeCommas = (value) => {
+  return value.replace(/,/g, '');
+};
+
+const checkFormComplete = (values) => {
+  return Object.values(values).every((value) => {
+    return Boolean(value);
+  });
+};
+
 export default function AddItemPage() {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
@@ -28,12 +43,6 @@ export default function AddItemPage() {
     // when values changed
     setIsFormComplete((prev) => checkFormComplete(values));
   }, [values]);
-
-  const checkFormComplete = (values) => {
-    return Object.values(values).every((value) => {
-      return Boolean(value);
-    });
-  };
 
   // handlers
   const handleSubmit = (e) => {
@@ -49,8 +58,8 @@ export default function AddItemPage() {
 
   const handleInputChange = (e) => {
     // input sanitize
-    const { name, value, type } = e.target;
-    handleChange(name, sanitize(type, value));
+    const { name, value } = e.target;
+    handleChange(name, sanitize(name, value));
   };
 
   return (
@@ -90,8 +99,8 @@ export default function AddItemPage() {
         <input
           name='price'
           id='ipt-product-price'
-          type='number'
-          value={values.price.toString()}
+          type='text'
+          value={addCommas(values.price.toString())}
           onChange={handleInputChange}
         />
 
