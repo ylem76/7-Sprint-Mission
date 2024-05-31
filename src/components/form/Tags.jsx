@@ -1,27 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-function TagItem({ tag, setTags }) {
-  const handleDelete = (e) => {
-    setTags((prev) => {
-      return prev.filter((t) => t !== tag);
-    });
-  };
+function TagItem({ tag, handleDelete }) {
   return (
     <div>
       {tag}
-      <button type='button' onClick={handleDelete}>
+      <button
+        type='button'
+        onClick={() => {
+          handleDelete(tag);
+        }}>
         삭제
       </button>
     </div>
   );
 }
 
-export default function Tags({ tags, setTags }) {
+export default function Tags({ tags, setValues }) {
   const [inputValue, setInputValue] = useState('');
-
-  // useEffect(() => {
-  //   console.log(tags);
-  // }, [tags]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -40,10 +35,18 @@ export default function Tags({ tags, setTags }) {
       if (inputValue === '') return;
 
       if (!isValueInArray(tags, inputValue)) {
-        setTags((prev) => [...prev, inputValue]);
+        setValues((prev) => {
+          return { ...prev, tags: [...prev.tags, inputValue] };
+        });
       }
       setInputValue('');
     }
+  };
+
+  const handleDelete = (tag) => {
+    setValues((prev) => {
+      return { ...prev, tags: tags.filter((t) => t !== tag) };
+    });
   };
 
   const isValueInArray = (arr, value) => {
@@ -65,10 +68,10 @@ export default function Tags({ tags, setTags }) {
       <ul className='tag-list'>
         {tags &&
           tags.length > 0 &&
-          tags.map((tag, index) => {
+          tags.map((tag) => {
             return (
               <li key={tag}>
-                <TagItem tag={tag} setTags={setTags} />
+                <TagItem tag={tag} handleDelete={handleDelete} />
               </li>
             );
           })}

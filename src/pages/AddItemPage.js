@@ -4,16 +4,18 @@ import FileInput from '../components/form/FileInput';
 
 const INITIAL_VALUES = {
   images: undefined,
-  name: undefined,
-  description: undefined,
-  price: undefined,
-  tags: undefined,
+  name: '',
+  description: '',
+  price: '',
+  tags: ['tag test'],
 };
 
 function sanitize(type, value) {
   // number type sanitize
+
   switch (type) {
     case 'number':
+      console.log(typeof value);
       return Number(value) || 0;
 
     default:
@@ -21,12 +23,11 @@ function sanitize(type, value) {
   }
 }
 export default function AddItemPage() {
-  const [tags, setTags] = useState(['주름', '테스트']);
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
   useEffect(() => {
-    console.log(values);
+    console.log(values.price);
     // when values changed
     // setIsFormComplete((prev) => {
     //   return prev;
@@ -51,7 +52,6 @@ export default function AddItemPage() {
 
   const handleInputChange = (e) => {
     // input sanitize
-    console.log('input change');
     const { name, value, type } = e.target;
     handleChange(name, sanitize(type, value));
   };
@@ -98,11 +98,11 @@ export default function AddItemPage() {
           name='price'
           id='ipt-product-price'
           type='number'
-          value={values.price}
+          value={values.price.toString()}
           onChange={handleInputChange}
         />
 
-        <Tags tags={tags} setTags={setTags} />
+        <Tags tags={values.tags} setTags={handleChange} setValues={setValues} />
       </form>
     </div>
   );
