@@ -2,6 +2,15 @@ import React from 'react';
 import ico_plus from '../../assets/images/ico_plus.svg';
 import ico_x from '../../assets/images/ico_x.svg';
 
+export function ButtonRounded({ className, children, ...rest }) {
+  return (
+    <button
+      className='flex justify-center items-center bg-blue-500 text-white font-semibold text-base leading-none border-0 cursor-pointer rounded-full'
+      {...rest}>
+      {children}
+    </button>
+  );
+}
 export function Button({ className, children, ...rest }) {
   return (
     <button

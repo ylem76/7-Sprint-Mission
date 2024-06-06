@@ -6,6 +6,7 @@ import IndexPage from './pages/IndexPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import AddItemPage from './pages/AddItemPage';
+import ProductPage from './pages/ProductPage';
 
 function Main() {
   return (
@@ -13,7 +14,11 @@ function Main() {
       <Layout>
         <Routes>
           <Route path='/' element={<IndexPage />} />
-          <Route path='/items' element={<ItemsPage />} />
+          <Route path='/items'>
+            <Route index element={<ItemsPage />} />
+            <Route path=':productSlug' element={<ProductPage />} />
+          </Route>
+
           <Route path='/addItem' element={<AddItemPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
