@@ -1,7 +1,13 @@
 import React, { ReactNode } from 'react';
-interface DefaultLayoutProps {
+import '@/styles/globals.css';
+
+interface RootLayoutProps {
   children: ReactNode;
 }
-export default function DefaultLayout({ children }: DefaultLayoutProps) {
-  return <div>{children}</div>;
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
 }
